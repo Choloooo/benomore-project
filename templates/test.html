@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+
+    <title>Simple Dashboard</title>
+    <style>
+      /* Add your existing styles here */
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+      .content {
+        text-align: center;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 90%; /* Adjust the width as needed */
+        height: 90vh; /* Adjust the height as needed */
+        margin: 0 auto; /* Center the container horizontally */
+        position: relative; /* Position relative for absolute positioning of menu icon */
+      }
+
+      .table-container {
+        text-align: center; /* Center align the table */
+        width: 100%; /* Initially, set width to 100% */
+      }
+
+      .container > * {
+        /* Inherit responsiveness from container */
+        width: inherit;
+        height: inherit;
+        margin: inherit;
+        position: inherit;
+        z-index: inherit;
+      }
+
+      .sidebar {
+        width: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+      }
+
+      .sidebar-left {
+        height: 100%;
+        width: 15%;
+        position: static;
+        top: 0;
+        left: 0;
+        transition: transform 0.3s ease-in-out; /* Add transition for smooth animation */
+        /*background-color: #fff; /* Background color */
+      }
+
+      .sidebar-left.open {
+        transform: translateX(0); /* Move it onto the screen when open */
+      }
+
+      .sidebar-left ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .sidebar-left ul li {
+        padding: 10px 15px;
+        cursor: pointer;
+      }
+
+      .sidebar-left ul li:hover {
+        background-color: #f1cff7; /* Change hover background color */
+      }
+
+      .sidebar-left .footer {
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        position: static;
+        /*color: #333;*/
+        margin-top: auto;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+      }
+
+      .dashboard {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        justify-content: space-between;
+      }
+
+      .content {
+        flex-grow: 1;
+      }
+
+      .search-container {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+      }
+
+      .dashboard-heading {
+        margin-right: auto;
+        font-size: 24px;
+        color: #333;
+      }
+
+      .search-input {
+        flex-grow: 1;
+        height: 40px;
+        padding: 0 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+
+      .filter-icon {
+        background-color: #c3c5c7;
+        color: #000;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 16px;
+        margin-left: 10px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .dashboard-controls {
+        display: flex;
+        align-items: center;
+      }
+
+      .control-button:hover {
+        background-color: #f1cff7; /* Change hover background color */
+      }
+
+      .filter-icon:hover {
+        background-color: #f1cff7; /* Change hover background color */
+      }
+
+      .control-button {
+        background-color: #c3c5c7;
+        color: #000;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 16px;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+
+      .dropdown-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end; /* Align items to the extreme right */
+        margin-left: auto; /* Push the dropdown container to the right */
+      }
+
+      .show-label {
+        margin-right: 10px;
+        color: #333;
+      }
+
+      .dropdown select {
+        height: 40px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        text-align: center; /* Center align the content */
+      }
+
+      th {
+        background-color: #f1f1f1;
+        color: #333;
+        text-align: center; /* Center align the content */
+      }
+
+      .avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #ccc;
+        margin-right: 10px;
+      }
+      .inbox-text {
+        margin-right: 30px; /* Add space between text and message count */
+      }
+
+      .message-count {
+        background-color: #c3c5c7; /* Message count background color */
+        color: #fff; /* Text color */
+        padding: 4px 8px; /* Padding */
+        border-radius: 50%; /* Circular shape */
+        font-size: 12px; /* Font size */
+      }
+
+      /* Menu icon styles */
+      .menu-icon {
+        top: 10px;
+        left: 10px;
+        cursor: pointer;
+        z-index: 999; /* Ensure it's above other elements */
+        display: none; /* Initially hide the menu icon */
+      }
+      .search-button {
+        background-color: transparent; /* Transparent background */
+        border: none; /* Remove default button border */
+        cursor: pointer; /* Cursor style */
+      }
+
+      .search-button:hover {
+        background-color: #f1cff7; /* Change hover background color */
+      }
+      .menu-icon:hover {
+        background-color: #f1cff7; /* Change hover background color */
+      }
+
+      .member-column {
+        width: 10%; /* Adjust the width as needed */
+      }
+
+      .bar {
+        width: 25px;
+        height: 3px;
+        background-color: #333;
+        margin: 5px 0;
+        transition: 0.4s;
+      }
+
+      /* Rotate first and third bar for menu icon animation */
+      .change .bar:first-child {
+        transform: rotate(-45deg) translate(-5px, 6px);
+      }
+
+      .change .bar:nth-child(2) {
+        opacity: 0;
+      }
+
+      .change .bar:last-child {
+        transform: rotate(45deg) translate(-5px, -6px);
+      }
+
+      /* Off-canvas menu styles */
+      .offcanvas-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0;
+        background-color: #fff;
+        overflow-x: hidden;
+        transition: 0.3s;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 998; /* Adjusted z-index value */
+      }
+
+      .offcanvas-menu.open {
+        width: 250px;
+      }
+
+      .offcanvas-content {
+        padding: 20px;
+      }
+
+      /* Media query for tab mode and smaller screens */
+      @media (max-width: 768px) {
+        .sidebar-left {
+          display: none; /* Hide the left sidebar on smaller screens */
+        }
+
+        .menu-icon {
+          display: block; /* Show the menu icon on smaller screens */
+        }
+      }
+
+      @media (max-width: 768px) {
+        .sidebar-right {
+          display: none; /* Hide the right sidebar on smaller screens */
+        }
+      }
+
+      /* Add border radius to table head */
+      /* Add shadow to table head */
+      th {
+        background-color: #f1f1f1;
+        color: #333;
+        border-radius: 8px 8px 0 0; /* Top rounded corners */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow effect */
+        text-align: center; /* Center align the content */
+      }
+
+      /* Add shadow to table rows */
+      td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        border-radius: 0 0 8px 8px; /* Bottom rounded corners */
+        box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
+        text-align: center; /* Center align the content */
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 8px; /* Rounded corners for the entire table */
+        overflow: hidden; /* Hide overflowing borders */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+      }
+
+      /* Add shadow to last row */
+      tr:last-child td {
+        border-bottom: none; /* Remove border from last row */
+        border-radius: 0 0 8px 8px; /* Bottom rounded corners */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow effect */
+      }
+
+      .avatar-2,
+      .avatar-3 {
+        margin-left: -15px; /* Negative margin to overlap */
+      }
+
+      .avatar-container {
+        display: flex;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Off-canvas menu -->
+      <div class="offcanvas-menu" id="offcanvas-menu">
+        <div class="offcanvas-content">
+          <h2>Menu</h2>
+          <ul>
+            <li><span class="icon">&#128188;</span> Project</li>
+            <li><span class="icon">&#10004;</span> My Tasks</li>
+            <li><span class="icon">&#128101;</span> Team</li>
+            <li><span class="icon">&#128196;</span> Files</li>
+            <li><span class="icon">&#128197;</span> Calendar</li>
+          </ul>
+          <div style="margin-top: 70px">
+            <span>Insight</span>
+          </div>
+          <ul style="display: flex; align-items: center">
+            <li style="display: flex; align-items: center">
+              <div
+                class="inbox-container"
+                style="display: flex; align-items: center"
+              >
+                <span class="icon" style="margin-right: 5px">&#128172;</span>
+                <!-- Chat icon -->
+                <span class="inbox-text" style="margin-right: 10px">Inbox</span>
+              </div>
+              <span class="message-count">5</span>
+              <!-- Circular icon for message count -->
+            </li>
+          </ul>
+          <div class="footer">
+            <div class="avatar"></div>
+            <span>Username</span>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar sidebar-left" id="sidebar-left">
+        <h2 style="margin-left: 10px">Left Sidebar</h2>
+        <ul>
+          <li><span class="icon">&#128188;</span> Project</li>
+          <li><span class="icon">&#10004;</span> My Tasks</li>
+          <li><span class="icon">&#128101;</span> Team</li>
+          <li><span class="icon">&#128196;</span> Files</li>
+          <li><span class="icon">&#128197;</span> Calendar</li>
+        </ul>
+
+        <div style="margin-top: 70px">
+          <span>Insight</span>
+        </div>
+        <ul>
+          <li>
+            <div class="inbox-container">
+              <span class="icon">&#128172;</span>
+              <!-- Chat icon -->
+              <span class="inbox-text">Inbox</span>
+            </div>
+            <span class="message-count">5</span>
+            <!-- Circular icon for message count -->
+          </li>
+        </ul>
+
+        <div class="footer">
+          <div class="avatar"></div>
+          <span>Username</span>
+        </div>
+      </div>
+      <div class="dashboard">
+        <div class="content">
+          <div class="search-container" style="margin-top: 10px">
+            <div
+              class="menu-icon"
+              onclick="toggleOffcanvasMenu()"
+              style="margin-right: 15px"
+            >
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+            <span style="margin-right: 15px; font-size: 24px">Dashboard</span>
+            <input
+              type="text"
+              class="search-input"
+              placeholder="Search..."
+              style="margin-right: 10px"
+            />
+            <button class="search-button" onclick="searchFunction()">
+              <i class="bi bi-search"></i>
+            </button>
+
+            <button class="filter-icon"><i class="bi bi-plus"></i></button>
+            <button class="filter-icon"><i class="bi bi-sliders"></i></button>
+          </div>
+
+          <div class="dashboard-controls">
+            <button class="control-button list-button">
+              <i class="bi bi-view-list"></i>List
+            </button>
+            <button class="control-button board-button">
+              <i class="bi bi-filter-right"></i>Board
+            </button>
+            <div class="dropdown-container">
+              <p class="show-label">Show:</p>
+              <div class="dropdown">
+                <select>
+                  <option value="option1">Option 1</option>
+                  <option value="option2">Option 2</option>
+                  <option value="option3">Option 3</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Task Name</th>
+                  <th>Due-in</th>
+                  <th>Task</th>
+                  <th>Status</th>
+                  <th class="member-column">Member</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populate table rows with data from your API -->
+                <tr>
+                  <td>
+                    <div style="display: flex; align-items: center">
+                      <div class="avatar"></div>
+                      <span style="margin-left: 10px">Task 1</span>
+                    </div>
+                  </td>
+                  <td>2024-03-15</td>
+                  <td>Review</td>
+                  <td>In Progress</td>
+                  <td class="avatar-container">
+                    <div class="avatar avatar-1"></div>
+                    <div class="avatar avatar-2"></div>
+                    <div class="avatar avatar-3"></div>
+                    <span class="ellipsis">⋮</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="display: flex; align-items: center">
+                      <div class="avatar"></div>
+                      <span style="margin-left: 10px">Task 2</span>
+                    </div>
+                  </td>
+                  <td>2024-03-17</td>
+                  <td>Design</td>
+                  <td>Completed</td>
+                  <td class="avatar-container">
+                    <div class="avatar avatar-1"></div>
+                    <div class="avatar avatar-2"></div>
+                    <div class="avatar avatar-3"></div>
+                    <span class="ellipsis">⋮</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar sidebar-right">Right Sidebar</div>
+    </div>
+    <!-- Menu icon -->
+
+    <script>
+      // Function to toggle off-canvas menu
+      function toggleOffcanvasMenu() {
+        const offcanvasMenu = document.getElementById("offcanvas-menu");
+        offcanvasMenu.classList.toggle("open");
+      }
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

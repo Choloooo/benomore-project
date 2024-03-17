@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Manager</title>
+    <style>
+      /* Your CSS styles here */
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        display: flex;
+        height: 100%;
+      }
+      .sidebar {
+        flex: 0 0 200px; /* Set sidebar width */
+        background-color: #f0f0f0;
+        padding: 20px;
+      }
+      .center {
+        flex: 1; /* Take remaining space */
+        padding: 20px;
+      }
+      .right-sidebar {
+        flex: 0 0 200px; /* Set sidebar width */
+        background-color: #f0f0f0;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <!-- Left sidebar content here -->
+        <h2>Left Sidebar</h2>
+      </div>
+      <div class="center">
+        <!-- Your provided content here -->
+        <!-- Success modal for project creation -->
+        <div id="project-success-modal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="project-success-message" style="color: green">
+              Project created successfully!
+            </p>
+            <button class="modal-button" id="project-ok-btn">OK</button>
+          </div>
+        </div>
+
+        <!-- Success modal for task creation -->
+        <div id="task-success-modal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="task-success-message" style="color: green">
+              Task created successfully!
+            </p>
+            <button class="modal-button" id="task-ok-btn">OK</button>
+          </div>
+        </div>
+
+        <!-- Rest of your provided content goes here -->
+        <!-- Please ensure to update any URLs or paths as necessary -->
+        <!-- Ensure that the JavaScript and jQuery scripts are included -->
+      </div>
+      <div class="right-sidebar">
+        <!-- Right sidebar content here -->
+        <h2>Right Sidebar</h2>
+      </div>
+    </div>
+  </body>
+</html>
