@@ -16,7 +16,7 @@ db.sqlite3
 /.vs/
 
 # Dependency Files
-/requirements.txt
+
 /Pipfile.lock
 
 # Secrets and Configuration
