@@ -1,0 +1,32 @@
+# Virtual Environment
+/venv/
+/env/
+/virtualenv/
+
+# Database Files
+db.sqlite3
+
+# Static and Media Files
+/staticfiles/
+/media/
+
+# IDE and Editor Files
+/.vscode/
+/.idea/
+/.vs/
+
+# Dependency Files
+/requirements.txt
+/Pipfile.lock
+
+# Secrets and Configuration
+/local_settings.py
+/settings.ini
+
+# Compiled Files
+/__pycache__/
+/migrations/
+
+# Logs and Temporary Files
+/logs/
+/tmp/
