@@ -10,7 +10,7 @@ The Project Manager API allows users to interact with the application programmat
 
 ### Base URL
 
-The base URL for all API endpoints is: `http://127.0.0.1:8000/api`
+The base URL for all API endpoints is: `http://127.0.0.1:8000/`
 
 ### Endpoints
 
