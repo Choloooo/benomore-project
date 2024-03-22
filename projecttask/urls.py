@@ -17,8 +17,11 @@ Including another URLconf
 # projecttaask/urls.py
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+
+from projecttask import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('tasks.urls')),  # Include the URLs of your app here
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -9,19 +9,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/font/bootstrap-icons.min.css"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-
     <link href="{% static 'css/style.css' %}" rel="stylesheet" />
     <style>
-      body {
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      }
-
       .center-content {
         display: flex;
         flex-direction: column;
@@ -30,11 +19,13 @@
         height: 100%;
         margin-top: 10px;
       }
+
       .button-container {
         display: flex;
         justify-content: space-between;
         margin-top: 20px; /* Add some margin between the buttons and the title */
       }
+
       .button-container button {
         padding: 10px 20px;
         font-size: 16px;
@@ -46,56 +37,9 @@
         transition: background-color 0.3s;
         color: #000000;
       }
+
       .button-container button:hover {
         background-color: #0056b3; /* Darker background color on hover */
-      }
-
-      /* Adjustments for search icons */
-      .search-container .search-icon,
-      .search-container .cancel-icon {
-        margin-left: 10px;
-      }
-
-      .search-container {
-        position: relative;
-
-        flex: 1;
-        flex-grow: 1;
-      }
-
-      /* Style for the search input */
-      .search-input {
-        width: 300px;
-        padding: 5px 0px 10px 5px; /* Increased right padding for the search icon */
-        border: 122px #dddddd;
-        border-right: 60px solid #dddddd;
-        border-radius: 10px;
-        font-size: 16px;
-        outline: none;
-        transition: border-color 0.3s;
-        background-color: #f8f9fa;
-        width: 100%;
-        flex-grow: 1;
-        min-width: 200px;
-      }
-
-      /* Style for the search icon */
-      .search-icon {
-        position: absolute;
-        top: 50%;
-        right: 40px; /* Adjusted position */
-        transform: translateY(-50%);
-        color: #999;
-      }
-
-      /* Style for the cancel icon */
-      .cancel-icon {
-        display: none;
-        position: absolute;
-        top: 50%;
-        right: 40px; /* Adjusted position */
-        transform: translateY(-50%);
-        color: #999;
       }
     </style>
   </head>
@@ -152,6 +96,7 @@
           <li><span class="icon">&#128196;</span> Files</li>
           <li><span class="icon">&#128197;</span> Calendar</li>
         </ul>
+
         <div style="margin-top: 70px">
           <span>Insight</span>
         </div>
@@ -166,11 +111,13 @@
             <!-- Circular icon for message count -->
           </li>
         </ul>
+
         <div class="footer">
           <div class="avatar"></div>
           <span>Username</span>
         </div>
       </div>
+
       <div class="center-bar">
         <div class="center">
           <div
@@ -180,74 +127,67 @@
               display: flex;
               justify-content: space-between;
               align-items: center;
-              width: 100%;
             "
           >
             <div
-              class="menu-icon"
-              onclick="toggleOffcanvasMenu()"
-              style="margin-right: 40px"
+              class="search-content"
+              style="display: flex; align-items: center; flex-grow: 1"
             >
-              <div class="bar"></div>
-              <div class="bar"></div>
-              <div class="bar"></div>
-            </div>
+              <div class="dashboard">
+                <div
+                  class="search-content"
+                  style="display: flex; align-items: center; flex-grow: 1"
+                >
+                  <div
+                    class="menu-icon"
+                    onclick="toggleOffcanvasMenu()"
+                    style="margin-right: 40px"
+                  >
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                  </div>
 
-            <span
-              style="
-                margin-right: 10px;
-                display: flex;
-                align-items: center;
-                font-size: 24px;
-              "
-              class="dashboard-text"
-              >Dashboard</span
-            >
-
-            <div
-              class="search-container"
-              style="margin-top: 10px; position: relative"
-            >
-              <input
-                type="text"
-                class="search-input"
-                id="search-input"
-                placeholder="Search..."
-                oninput="toggleCancelIcon()"
-                style="overflow-x: auto; white-space: nowrap"
-              />
-              <i
-                class="fas fa-search search-icon"
-                style="
-                  position: absolute;
-                  top: 50%;
-                  transform: translateY(-50%);
-                  right: 10px;
-                "
-              ></i>
-              <i
-                class="fas fa-times cancel-icon"
-                id="cancel-icon"
-                onclick="clearSearchInput()"
-                style="
-                  position: absolute;
-                  top: 50%;
-                  transform: translateY(-50%);
-                  right: 40px;
-                  display: none;
-                "
-              ></i>
-            </div>
-
-            <div class="button-group">
-              <button class="filter-icon">
-                <i
-                  class="bi bi-plus"
-                  id="modal-trigger"
-                  onclick="openTaskOrProjectModal()"
-                ></i>
-              </button>
-              <button class="filter-icon"><i class="bi bi-sliders"></i></button>
+                  <div class="dashboard">
+                    <div
+                      class="dashboard-text"
+                      style="display: flex; align-items: center"
+                    >
+                      <span style="margin-right: 10px; font-size: 24px"
+                        >Dashboard</span
+                      >
+                      <div class="search-box" style="position: relative">
+                        <input
+                          type="text"
+                          onkeypress="searchOnEnter(event)"
+                          placeholder="Search..."
+                          id="search-input"
+                          class="search-input"
+                          style="
+                            width: 100%;
+                            min-width: 200px;
+                            max-width: 400px;
+                            padding-right: 30px;
+                            box-sizing: border-box;
+                          "
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="button-group">
+                    <button class="filter-icon">
+                      <i
+                        class="bi bi-plus"
+                        id="modal-trigger"
+                        onclick="openTaskOrProjectModal()"
+                      ></i>
+                    </button>
+                    <button class="filter-icon">
+                      <i class="bi bi-sliders"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -266,6 +206,7 @@
               </div>
             </div>
           </div>
+
           <div id="project-form-modal" class="modal">
             <div class="modal-content">
               <span class="close" onclick="closeModal('project-form-modal')"
@@ -362,6 +303,7 @@
               </form>
             </div>
           </div>
+
           <div id="task-form-modal" class="modal">
             <div class="modal-content">
               <span class="close" onclick="closeModal('task-form-modal')"
@@ -530,6 +472,7 @@
               </form>
             </div>
           </div>
+
           <div class="dashboard-controls">
             <button class="control-button list-button">
               <i class="bi bi-view-list"></i>List
@@ -625,10 +568,12 @@
               <button class="modal-button" id="task-ok-btn">OK</button>
             </div>
           </div>
+
           <!-- Error message for no projects found -->
           <p id="no-projects-error" style="display: none; color: red">
             No projects found.
           </p>
+
           <h2>Tasks</h2>
           <table>
             <thead>
@@ -645,9 +590,11 @@
             </tbody>
           </table>
         </div>
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="{% static 'js/index.js' %}"></script>
+
         <script>
           // Function to open the modal for creating a task or project
           function openTaskOrProjectModal() {
@@ -703,41 +650,6 @@
               }
             }
           };
-
-          // Function to toggle the visibility of the delete icon
-          function toggleCancelIcon() {
-            var searchInput = document.getElementById("search-input");
-            var cancelIcon = document.getElementById("cancel-icon");
-
-            if (searchInput.value.trim() !== "") {
-              cancelIcon.style.display = "inline";
-            } else {
-              cancelIcon.style.display = "none";
-            }
-          }
-        </script>
-
-        <script>
-          function showDeleteIcon(input) {
-            var deleteIcon = input.parentElement.querySelector(".cancel-icon");
-            if (input.value.trim() !== "") {
-              deleteIcon.style.display = "inline";
-            } else {
-              deleteIcon.style.display = "none";
-            }
-          }
-
-          function clearSearchInput() {
-            var searchInput = document.getElementById("search-input");
-            searchInput.value = "";
-            toggleCancelIcon(); // Update cancel icon visibility
-          }
-
-          function searchOnEnter(event) {
-            if (event.key === "Enter") {
-              // Perform search here
-            }
-          }
         </script>
       </div>
     </div>

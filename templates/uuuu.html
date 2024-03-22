@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Box</title>
+    <style>
+      /* Style for the search box container */
+      .search-container {
+        position: relative;
+        display: inline-block;
+      }
+
+      /* Style for the search input */
+      .search-input {
+        width: 300px;
+        padding: 10px 40px 10px 40px; /* Increased right padding for the search icon */
+        border: 2px solid #ccc;
+        border-radius: 25px;
+        font-size: 16px;
+        outline: none;
+        transition: border-color 0.3s;
+        background-color: #f8f9fa;
+      }
+
+      /* Style for the search icon */
+      .search-icon {
+        position: absolute;
+        top: 50%;
+        right: 40px; /* Adjusted position */
+        transform: translateY(-50%);
+        color: #999;
+      }
+
+      /* Style for the cancel icon */
+      .cancel-icon {
+        position: absolute;
+        top: 50%;
+        right: 15px;
+        transform: translateY(-50%);
+        color: #999;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      /* Show cancel icon when input is focused or has value */
+      .search-input:focus + .cancel-icon,
+      .search-input:not(:placeholder-shown) + .cancel-icon {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="search-container">
+      <input type="text" class="search-input" placeholder="Search..." />
+      <i class="fas fa-search search-icon"></i>
+      <i class="fas fa-times cancel-icon"></i>
+    </div>
+
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <script>
+      // JavaScript to clear search input
+      document
+        .querySelector(".cancel-icon")
+        .addEventListener("click", function () {
+          document.querySelector(".search-input").value = "";
+          this.style.opacity = 0;
+        });
+
+      // JavaScript to show/hide cancel icon on input change
+      document
+        .querySelector(".search-input")
+        .addEventListener("input", function () {
+          const cancelIcon = document.querySelector(".cancel-icon");
+          if (this.value.length > 0) {
+            cancelIcon.style.opacity = 1;
+          } else {
+            cancelIcon.style.opacity = 0;
+          }
+        });
+    </script>
+  </body>
+</html>

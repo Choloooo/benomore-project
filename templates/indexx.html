@@ -1,75 +1,348 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Project Manager</title>
-    <style>
-      /* Your CSS styles here */
-      body,
-      html {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      .container {
-        display: flex;
-        height: 100%;
-      }
-      .sidebar {
-        flex: 0 0 200px; /* Set sidebar width */
-        background-color: #f0f0f0;
-        padding: 20px;
-      }
-      .center {
-        flex: 1; /* Take remaining space */
-        padding: 20px;
-      }
-      .right-sidebar {
-        flex: 0 0 200px; /* Set sidebar width */
-        background-color: #f0f0f0;
-        padding: 20px;
-      }
-    </style>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   </head>
   <body>
+    <!-- Success modal for project creation -->
     <div class="container">
-      <div class="sidebar">
-        <!-- Left sidebar content here -->
-        <h2>Left Sidebar</h2>
-      </div>
-      <div class="center">
-        <!-- Your provided content here -->
-        <!-- Success modal for project creation -->
-        <div id="project-success-modal" class="modal">
-          <div class="modal-content">
-            <span class="close">&times;</span>
-            <p id="project-success-message" style="color: green">
-              Project created successfully!
-            </p>
-            <button class="modal-button" id="project-ok-btn">OK</button>
-          </div>
-        </div>
+      <div class="offcanvas-menu" id="offcanvas-menu">
+        <div class="offcanvas-content">
 
-        <!-- Success modal for task creation -->
-        <div id="task-success-modal" class="modal">
-          <div class="modal-content">
-            <span class="close">&times;</span>
-            <p id="task-success-message" style="color: green">
-              Task created successfully!
-            </p>
-            <button class="modal-button" id="task-ok-btn">OK</button>
+          <!-- Menu content here -->
+          <h2>Menu</h2>
+          <ul>
+            <li><span class="icon">💼</span> Project</li>
+            <li><span class="icon">✔</span> My Tasks</li>
+            <li><span class="icon">👥</span> Team</li>
+            <li><span class="icon">📄</span> Files</li>
+            <li><span class="icon">📅</span> Calendar</li>
+          </ul>
+          <div style="margin-top: 70px">
+            <span>Insight</span>
           </div>
+          <ul style="display: flex; align-items: center">
+            <li style="display: flex; align-items: center">
+              <div class="inbox-container" style="display: flex; align-items: center">
+                <span class="icon" style="margin-right: 5px">💬</span>
+                <!-- Chat icon -->
+                <span class="inbox-text" style="margin-right: 10px">Inbox</span>
+              </div>
+              <span class="message-count">5</span>
+              <!-- Circular icon for message count -->
+            </li>
+          </ul>
+          <div class="footer" style="margin-top: auto; display: flex; align-items: center;">
+            <div class="avatar"></div> <!-- Circular avatar icon -->
+            <span style="margin-left: 5px; display: inline-block;">Username</span>
         </div>
+          
+        
+        </div>
+        <button class="close-button" onclick="toggleOffcanvasMenu()">×</button>
+      </div>
+      <div class="sidebar sidebar-left" id="sidebar-left">
+        <h2 style="margin-left: 10px">Left Sidebar</h2>
+        <ul>
+          <li><span class="icon">&#128188;</span> Project</li>
+          <li><span class="icon">&#10004;</span> My Tasks</li>
+          <li><span class="icon">&#128101;</span> Team</li>
+          <li><span class="icon">&#128196;</span> Files</li>
+          <li><span class="icon">&#128197;</span> Calendar</li>
+        </ul>
 
-        <!-- Rest of your provided content goes here -->
-        <!-- Please ensure to update any URLs or paths as necessary -->
-        <!-- Ensure that the JavaScript and jQuery scripts are included -->
+        <div style="margin-top: 70px">
+          <span>Insight</span>
+        </div>
+        <ul>
+          <li>
+            <div class="inbox-container">
+              <span class="icon">&#128172;</span>
+              <!-- Chat icon -->
+              <span class="inbox-text">Inbox</span>
+            </div>
+            <span class="message-count">5</span>
+            <!-- Circular icon for message count -->
+          </li>
+        </ul>
+
+        <div class="footer">
+          <div class="avatar"></div>
+          <span>Username</span>
+        </div>
       </div>
-      <div class="right-sidebar">
-        <!-- Right sidebar content here -->
-        <h2>Right Sidebar</h2>
+  
+ 
+      <div class="search-container" style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+        <div class="search-content" style="display: flex; align-items: center; flex-grow: 1;">
+          <div class="menu-icon" onclick="toggleOffcanvasMenu()" style="margin-right: 40px">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+          </div>
+          <span style="margin-right: 40px; font-size: 24px">Dashboard</span>
+          <div style="position: relative; flex-grow: 1;">
+            <input type="text" class="search-input" id="search-input" placeholder="Search Project..." style="margin-right: 10px; width: 100%; padding-right: 30px; box-sizing: border-box;" onkeypress="searchOnEnter(event)">
+            <button class="search-button" id="clear-button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+              <i class="bi bi-x-circle"></i>
+            </button>
+          </div>
+          <button class="search-button" id="search-button">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+      
+        <div class="button-group">
+          <button class="filter-icon"><i class="bi bi-plus" id="modal-trigger"></i></button>
+          <button class="filter-icon"><i class="bi bi-sliders"></i></button>
+        </div>
       </div>
+      
+      
+      
+      
+    <div class="center-bar">
+       <div class="dashboard-controls">
+          <button class="control-button list-button">
+          <i class="bi bi-view-list"></i>List
+          </button>
+          <button class="control-button board-button">
+          <i class="bi bi-filter-right"></i>Board
+          </button>
+          <div id="filter-container">
+             <!-- Filter tag will be dynamically added here -->
+          </div>
+          <div class="dropdown-container">
+             <p class="show-label">Project Status:</p>
+             <div class="dropdown">
+                <select id="status-filter">
+                   <option value="">All</option>
+                   <option value="ongoing">Ongoing</option>
+                   <option value="completed">Completed</option>
+                </select>
+             </div>
+          </div>
+       </div>
+       <div class="table-container">
+          <h2>Projects</h2>
+          <table>
+             <thead>
+                <tr>
+                   <th>Project Name</th>
+                   <th>Status</th>
+                   <th>Description</th>
+                   <th>Edit</th>
+                   <th>Delete</th>
+                   <!-- Added column header for delete button -->
+                </tr>
+             </thead>
+             <tbody id="project-list">
+                <!-- Projects will be dynamically added here -->
+             </tbody>
+          </table>
+          <p id="no-projects-error" style="display: none; color: red">
+             No projects found.
+          </p>
+       </div>
+       <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Create</h2>
+            <div class="button-container">
+                <button id="createProjectBtn" class="filter-icon-modal">Create Project</button>
+                <button id="createTaskBtn" class="filter-icon-modal">Create Task</button>
+            </div>
+        </div>
     </div>
-  </body>
+       <div class="modal-overlay" id="modal-overlay">
+          <!-- Modal content -->
+          <div class="modal">
+             <span class="close-button" id="close-button">&times;</span>
+             <form id="project-form">
+                {% csrf_token %}
+                <label for="project-name">Project Name:</label>
+                <input type="text" id="project-name" name="name" class="editable" required />
+                <label for="project-description">Description:</label>
+                <textarea id="project-description" name="description" class="editable" required></textarea>
+                <label for="project-status">Status:</label>
+                <select id="project-status" name="status" class="editable" required>
+                   <!-- Status options will be dynamically added here -->
+                </select>
+                <button type="submit">Create Project</button>
+             </form>
+          </div>
+       </div>
+       <div id="project-success-modal" class="modal">
+          <div class="modal-content">
+             <span class="close">&times;</span>
+             <p id="project-success-message" style="color: green">
+                Project created successfully!
+             </p>
+             <button class="modal-button" id="project-ok-btn">OK</button>
+          </div>
+       </div>
+       <!-- Success modal for task creation -->
+       <div id="task-success-modal" class="modal">
+          <div class="modal-content">
+             <span class="close">&times;</span>
+             <p id="task-success-message" style="color: green">
+                Task created successfully!
+             </p>
+             <button class="modal-button" id="task-ok-btn">OK</button>
+          </div>
+       </div>
+       <div id="projectFormContainer" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeProjectForm">&times;</span>
+            <h2>Create New Project</h2>
+            <form id="project-form">
+                {% csrf_token %}
+                <label for="project-name">Project Name:</label>
+                <input type="text" id="project-name" name="name" class="editable" required />
+                <label for="project-description">Description:</label>
+                <textarea id="project-description" name="description" class="editable" required></textarea>
+                <label for="project-status">Status:</label>
+                <select id="project-status" name="status" class="editable" required>
+                    <!-- Status options will be dynamically added here -->
+                </select>
+                <button type="submit">Create Project</button>
+            </form>
+        </div>
+    </div>
+    
+    <div id="taskFormContainer" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeTaskForm">&times;</span>
+            <h2>Create New Task</h2>
+            <form id="task-form">
+                {% csrf_token %}
+                <label for="task-name">Task Name:</label>
+                <input type="text" id="task-name" name="name" class="editable" required />
+                <label for="task-created-date">Created Date:</label>
+                <input type="date" id="task-created-date" name="created_date" class="editable" required />
+                <label for="task-due-in">Due In:</label>
+                <input type="text" id="task-due-in" name="due_in" placeholder="e.g. 3d, 44h" class="editable" required />
+                <label for="task-total-tasks">Total Tasks:</label>
+                <input type="number" id="task-total-tasks" name="total_tasks" class="editable" required />
+                <label for="task-status">Status:</label>
+                <select id="task-status" name="status" class="editable" required>
+                    <option value="ongoing">Ongoing</option>
+                    <option value="completed">Completed</option>
+                </select>
+                <label for="task-project">Project:</label>
+                <select id="task-project" name="project" class="editable" required>
+                    <!-- Projects options will be dynamically added here -->
+                </select>
+                <button type="submit">Create Task</button>
+            </form>
+        </div>
+    </div>
+       <h2>Projects</h2>
+       <table>
+          <thead>
+             <tr>
+                <th>Project Name</th>
+                <th>Status</th>
+                <th>Description</th>
+                <th>Edit</th>
+                <th>Delete</th>
+                <!-- Added column header for delete button -->
+             </tr>
+          </thead>
+          <tbody id="project-list">
+             <!-- Projects will be dynamically added here -->
+          </tbody>
+       </table>
+       
+       <h2>Tasks</h2>
+       <table>
+          <thead>
+             <tr>
+                <th>Task Name</th>
+                <th>Due In</th>
+                <th>Total Tasks</th>
+                <th>Status</th>
+                <th class="member-column">Member</th>
+             </tr>
+          </thead>
+          <tbody id="task-list">
+             <!-- Tasks will be dynamically added here -->
+          </tbody>
+       </table>
+    </div>
+    <div class="right-sidebar">
+       <!-- Right sidebar content here -->
+       yoooooo
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Make sure jQuery is loaded before this script -->
+    <script src="{% static 'js/script.js' %}"></script>
+
+    <script>
+      // Get the modal
+      var modal = document.getElementById("myModal");
+      var projectModal = document.getElementById("projectFormContainer");
+      var taskModal = document.getElementById("taskFormContainer");
+  
+      // Get the button that opens the modal
+      var btn = document.getElementById("modal-trigger");
+  
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+  
+      // Get the close buttons for project and task forms
+      var closeProjectForm = document.getElementById("closeProjectForm");
+      var closeTaskForm = document.getElementById("closeTaskForm");
+  
+      // When the user clicks the button, open the modal 
+      btn.onclick = function () {
+          modal.style.display = "block";
+      }
+  
+      // When the user clicks on <span> (x) or close buttons, close the modals
+      span.onclick = function () {
+          modal.style.display = "none";
+          projectModal.style.display = "none";
+          taskModal.style.display = "none";
+      }
+  
+      closeProjectForm.onclick = function () {
+          projectModal.style.display = "none";
+      }
+  
+      closeTaskForm.onclick = function () {
+          taskModal.style.display = "none";
+      }
+  
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function (event) {
+          if (event.target == modal) {
+              modal.style.display = "none";
+          }
+      }
+  
+      // Button actions for showing project and task forms
+      document.getElementById("createProjectBtn").onclick = function () {
+          projectModal.style.display = "block";
+          modal.style.display = "none"; // Close the "Choose What to Create" modal
+      }
+  
+      document.getElementById("createTaskBtn").onclick = function () {
+          taskModal.style.display = "block";
+          modal.style.display = "none"; // Close the "Choose What to Create" modal
+      }
+  </script>
+  
+ 
+  
+ </body>
 </html>

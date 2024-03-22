@@ -1,0 +1,571 @@
+
+.container {
+    display: flex;
+    height: 100%;
+    background-color:#ffffff;
+    height: 100vh; 
+  }
+  .sidebar {
+    flex: 0 0 200px; /* Set sidebar width */
+    
+    padding: 20px;
+  }
+  .center {
+    flex: 1; /* Take remaining space */
+    padding: 20px;
+  }
+  .right-sidebar {
+    flex: 0 0 200px; /* Set sidebar width */
+    background-color: #ffffff;
+    padding: 20px;
+  }
+  .offcanvas-menu.show {
+    display: block;
+  }
+  
+  .search-container {
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: flex-start;
+      padding: 5px;
+      align-items: center;
+      margin-top: 10px; /* Added margin-top */
+     
+      
+    }
+    
+    
+    .search-container .menu-icon {
+      margin-right: 15px;
+      cursor: pointer;
+    }
+    
+    .search-container .menu-icon .bar {
+      width: 25px;
+      height: 3px;
+      background-color: #333;
+      margin: 5px 0;
+      transition: 0.4s;
+    }
+    
+    .search-container span {
+      margin-right: 15px;
+      font-size: 24px;
+    }
+    
+   
+
+    
+
+    
+    .search-container .search-button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    .cancel-icon {
+      display: none;
+    }
+    
+    
+    
+    .search-container .filter-icon {
+      background-color: #c3c5c7;
+      color: #000;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      margin-left: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    
+   
+    .dashboard-controls {
+      display: flex;
+      align-items: center;
+    }
+    
+    .dashboard-controls .control-button {
+      background-color: #c3c5c7;
+      color: #000;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      margin-right: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    
+    .dashboard-controls .control-button:hover {
+      background-color: #f1cff7;
+    }
+    
+    .dashboard-controls .show-label {
+      margin-right: 10px;
+      color: #333;
+    }
+    
+    .dashboard-controls .dropdown-container {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-left: auto;
+    }
+    
+    .dashboard-controls .dropdown select {
+      height: 40px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    .table-container {
+      text-align: center;
+      width: 100%;
+    }
+    
+    .table-container table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .table-container th,
+    .table-container td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+    
+    .table-container th {
+      background-color: #f1f1f1;
+      color: #333;
+      border-radius: 8px 8px 0 0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .table-container td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .table-container tr:last-child td {
+      border-bottom: none;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .table-container .avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #ccc;
+      margin-right: 10px;
+    }
+    
+    .table-container .inbox-text {
+      margin-right: 30px;
+    }
+    .button-group {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    
+    
+    
+    .table-container .message-count {
+      background-color: #c3c5c7;
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 50%;
+      font-size: 12px;
+    }
+    
+    .table-container .avatar-2,
+    .table-container .avatar-3 {
+      margin-left: -15px;
+    }
+    
+    .table-container .avatar-container {
+      display: flex;
+      align-items: center;
+    }
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black overlay */
+    }
+    
+    
+    
+   
+    
+    
+    .modal-content button {
+                background-color: #E6E6FA;
+                color: #333;
+                border: none;
+                padding: 10px 20px;
+                margin: 5px;
+                border-radius: 5px;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+    
+            .modal-content button:hover {
+                background-color: #ccc;
+            }
+    
+    .close-button {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    .close-button:hover,
+    .close-button:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    
+    .sidebar-left h2 {
+      margin-left: 10px;
+    }
+    
+    .sidebar-left ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    .sidebar-left ul li {
+      padding: 10px;
+      margin: 5px 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+    
+    .sidebar-left ul li .icon {
+      margin-right: 10px;
+    }
+    
+    .sidebar-left .inbox-container {
+      display: flex;
+      align-items: center;
+    }
+    
+    .sidebar-left .message-count {
+      margin-left: auto;
+      margin-right: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 50%;
+      padding: 5px;
+    }
+    
+    
+    .offcanvas-menu {
+      display: none; /* Initially hide the offcanvas menu */
+      width: 190px;
+      height: 100%;
+      background-color: #e9e2e2;
+      position: fixed;
+      top: 0;
+      left: 0;
+      overflow-x: hidden;
+      overflow-x: auto;
+      padding-top: 20px;
+    }
+
+    
+
+    .offcanvas-content {
+      padding-bottom: 50px; /* Ensure space for the close button */
+    }
+    .close-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 24px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color:#000000
+
+    }
+
+    .search-content {
+      display: flex;
+      align-items: center;
+      flex-grow: 1; /* Allow the search content to take up remaining space */
+    }
+    
+
+    .menu-icon {
+      cursor: pointer;
+    }
+    
+    .offcanvas-menu h2 {
+      margin-left: 10px;
+    }
+    
+    .offcanvas-menu ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    .offcanvas-menu ul li {
+      padding: 10px;
+      margin: 5px 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+    
+    .offcanvas-menu ul li .icon {
+      margin-right: 10px;
+    }
+    
+    .offcanvas-menu .inbox-container {
+      display: flex;
+      align-items: center;
+    }
+    
+    .offcanvas-menu .message-count {
+      margin-left: auto;
+      margin-right: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 50%;
+      padding: 5px;
+    }
+    
+    .offcanvas-menu .footer {
+      
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      background-color: #fff;
+      border-top: 1px solid #ccc;
+    }
+    
+    .offcanvas-menu .avatar {
+      width: 40px;
+      height: 40px;
+      background-color: #ccc;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .center-bar {
+      /* Take up remaining space */
+      flex: 1;
+      /* Center the items horizontally */
+      display: flex;
+      justify-content: center;
+     /* flex-direction: column; /* Stack items vertically */
+      margin-right: 20px;
+      justify-content: space-between;
+      
+    }
+
+    @media only screen and (max-width: 786px) {
+      .sidebar-left {
+        display: none;
+      }
+      .search-input {
+        width: 200px;
+    }
+
+    .container {
+        /* Adjust container to stack center bar and right sidebar vertically */
+        flex-direction: column;
+      }
+      
+      .center-bar {
+        /* Adjust width of center bar for smaller screens */
+        width: 100%;
+      }
+      
+      .sidebar,
+      .sidebar-right {
+        /* Adjust width of sidebars to 100% for smaller screens */
+        width: 100%;
+      }
+    }
+
+    
+    /* CSS for hiding the menu icon button on wide screens */
+@media only screen and (min-width: 786px) {
+.menu-icon {
+  display: none;
+}
+}
+
+
+
+    
+.footer {
+margin-top: auto; /* Push the footer to the bottom of the sidebar */
+padding: 10px; /* Optional: Add padding for better spacing */
+display: flex; /* Use flexbox layout */
+align-items: center; /* Align items vertically */
+}
+
+.avatar {
+width: 30px; /* Adjust size as needed */
+height: 30px; /* Adjust size as needed */
+border-radius: 50%; /* Make it circular */
+background-color: #ccc; /* Example background color */
+margin-right: 10px; /* Add margin between avatar and username */
+}
+
+
+
+    
+      
+    .filter-tag {
+      display: inline-block;
+      margin-right: 10px;
+      background-color: #f0f0f0;
+      padding: 5px;
+      border-radius: 5px;
+    }
+    .editing {
+      border: 1px solid blue; /* Change the border color to indicate editing */
+    }
+
+    .filter-tag p {
+      display: inline;
+      margin: 0;
+    }
+
+    .filter-tag .cancel-icon {
+      cursor: pointer;
+      margin-left: 5px;
+    }
+
+    /* Additional CSS for table */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th,
+    td {
+      border: 1px solid #dddddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .editable {
+      cursor: pointer;
+      border: 1px solid #ccc; /* Add border to editable fields */
+      padding: 4px; /* Add padding to editable fields */
+      display: inline-block; /* Ensure inline-block for editable fields */
+    }
+
+    select.editable {
+      cursor: pointer; /* Set cursor for dropdowns */
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    }
+
+    .modal-content {
+        background-color: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    max-width: 90%;
+    text-align: center;
+}
+#taskOrProjectModal {
+    display: none; /* Hide the modal by default */
+  }
+      
+      .modal-content h2 {
+        text-align: center; /* Center the heading */
+      }
+      
+      .modal-content .button-container {
+        display: flex;
+        justify-content: center; /* Center the buttons horizontally */
+        margin-top: 20px; /* Add some space between heading and buttons */
+      }
+      
+      .modal-content button {
+        padding: 10px 20px;
+        margin: 0 10px; /* Add margin between buttons */
+      }
+      
+
+      
+
+      
+      
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .modal-button {
+      padding: 10px 20px;
+      background-color: #4caf50; /* Green */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .modal-button:hover {
+      background-color: #45a049; /* Dark green */
+    }
